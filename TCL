@@ -1,0 +1,41 @@
+use universidad2;
+
+#Mostramos 5 registros de la tabla ubicacion
+
+SELECT * FROM ubicacion LIMIT 5;
+
+
+#Seteamos valor de Auto AUTOCOMMIT en 0
+
+SELECT @@AUTOCOMMIT;
+
+SET AUTOCOMMIT = 0;
+
+
+-- TRANSACCION TABLA ubicacion
+-- BORRA LOS REGISTROS CON id_ubicacion = 3
+START TRANSACTION;
+
+DELETE from ubicacion where id_ubicacion = 5;
+
+SELECT * FROM ubicacion;
+
+-- COMMIT;
+-- ROLLBACK; 
+
+START TRANSACTION;
+INSERT INTO ubicacion (id_ubicacion,id_facultad,id_carreras,nombre) values (7,1,1,'monte grande');
+INSERT INTO ubicacion (id_ubicacion,id_facultad,id_carreras,nombre) values (8,2,2,'berazategui');
+INSERT INTO ubicacion (id_ubicacion,id_facultad,id_carreras,nombre) values (9,3,3,'adrogue');
+INSERT INTO ubicacion (id_ubicacion,id_facultad,id_carreras,nombre) values (10,4,4,'banfield');
+savepoint primeros4inserts;
+INSERT INTO ubicacion (id_ubicacion,id_facultad,id_carreras,nombre) values (11,5,5,'avellaneda');
+INSERT INTO ubicacion (id_ubicacion,id_facultad,id_carreras,nombre) values (12,1,1,'caballito');
+INSERT INTO ubicacion (id_ubicacion,id_facultad,id_carreras,nombre) values (13,2,2,'belgrano');
+INSERT INTO ubicacion (id_ubicacion,id_facultad,id_carreras,nombre) values (14,3,3,'llavallol');
+savepoint siguientes4inserts;
+
+select * from ubicacion;
+-- ROLLBACK TO primeros4inserts; 
+-- ROLLBACK;
+-- COMMIT;
