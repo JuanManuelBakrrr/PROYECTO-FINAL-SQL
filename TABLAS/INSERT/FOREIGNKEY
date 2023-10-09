@@ -1,0 +1,232 @@
+create schema universidad2;
+use universidad2;
+
+CREATE TABLE `carreras` (
+  `id_carreras` int ,
+  `id_estudiante`int,
+  `id_ubicacion`int,
+  `id_facultad`int,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_carreras`)
+  );
+  
+  
+  CREATE TABLE `ubicacion` (
+  `id_ubicacion` int ,
+  `id_facultad`int,
+  `id_carreras`int,
+  `nombre` varchar(45),
+  PRIMARY KEY (`id_ubicacion`)
+  );
+  
+  
+  
+  CREATE TABLE `facultad` (
+  `id_facultad` int ,
+  `id_ubicacion` int ,
+  `id_carreras`int,
+  `nombre` varchar(45) ,
+  `email` varchar(45) ,
+  PRIMARY KEY (`id_facultad`)
+  );
+  
+  
+  CREATE TABLE `profesores` (
+  `id_profesores` int ,
+  `id_facultad` int ,
+  `id_materia` int ,
+  `id_comision` int,
+  `nombre` varchar(45) ,
+  `titulo` varchar(45) ,
+  PRIMARY KEY (`id_profesores`)
+  );
+  
+  
+  CREATE TABLE `materia` (
+  `id_materia` int ,
+  `id_profesores`int,
+  `id_comision`int,
+  `id_carrera`int,
+  `nombre` varchar(45),
+  PRIMARY KEY (`id_materia`)
+  );
+  
+  
+  CREATE TABLE `comision`(
+  `id_comision` int,
+  `id_materia`int,
+  `id_profesor`int,
+  `id_estudiante`int,
+  `id_inscripcion`int,
+  `numero` int,
+  `nombrecomi`varchar(45),
+  PRIMARY KEY (`id_comision`)
+  );
+
+
+
+ CREATE TABLE `estudiante` (
+  `id_estudiante` int ,
+  `id_carrera`int,
+  `id_comision` int ,
+  `id_materia` int,
+  `id_facultad` int,
+  `id_inscripcion`int,
+  `nombre` varchar(45) ,
+  `dni` varchar(45),
+  `email` varchar(45),
+   nota varchar(10),
+  PRIMARY KEY (`id_estudiante`)
+  );
+  
+
+
+CREATE TABLE `inscripcion` (
+  `id_inscripcion` int ,
+  `id_comision`int,
+  `id_estudiante` int,
+  `id_carrera` int ,
+  `fecha` date ,
+  `periodo` varchar(45),
+  PRIMARY KEY (`id_inscripcion`)
+  );
+  
+  
+insert into carreras values (1,40929871,1,1,'abogacia');
+insert into carreras values (2,40929872,2,2,'contador publico');
+insert into carreras values (3,40929873,3,3,'relaciones laborales');
+insert into carreras values (4,40929874,4,4,'ingeniero en sistemas');
+insert into carreras values (5,40929875,5,5,'psicopedagoga');
+
+insert into ubicacion values (1,1,1,'lomas de zamora');
+insert into ubicacion values (2,2,2,'zarate');
+insert into ubicacion values (3,3,3,'alberti');
+insert into ubicacion values (4,4,4,'quilmes');
+insert into ubicacion values (5,5,5,'lanus');
+
+insert into facultad values (1,1,1,'lomas de zamora','facultad_lomas@gmail.com');
+insert into facultad values (2,2,2,'zarate','facultad_zarate@gmail.com');
+insert into facultad values (3,3,3,'alberti','facultad_alberti@gmail.com');
+insert into facultad values (4,4,4,'quilmes','facultad_quilmes@gmail.com');
+insert into facultad values (5,5,5,'lanus','facultad_lanus@gmail.com');
+
+insert into profesores values (101,1,11,111,'jorge lopez','abogado');
+insert into profesores values (102,2,22,222,'alberto perez','contador');
+insert into profesores values (103,3,33,333,'claudia sanchez','rrhh');
+insert into profesores values (104,4,44,444,'natalia gonzales','ingeniera');
+insert into profesores values (105,5,55,555,'claudio messi','psicologo');
+
+
+
+insert into materia values (11,101,111,1,'derecho romano');
+insert into materia values (22,102,222,2,'matematica1');
+insert into materia values (33,103,333,3,'derechos humanos');
+insert into materia values (44,104,444,4,'igenieria1');
+insert into materia values (55,105,555,5,'psicologia1');
+
+
+insert into comision values (111,11,101,40929871,1010,111,'abogacia1');
+insert into comision values (222,22,102,40929872,2020,222,'contador1');
+insert into comision values (333,33,103,40929873,3030,333,'laborales1');
+insert into comision values (444,44,104,40929874,4040,444,'ingeniera1');
+insert into comision values (555,55,105,40929875,5050,555,'psicologia1');
+
+insert into estudiante values (40929871,1,111,11,1,1010,'valentina',40929871,'valentina@gmail.com',4);
+insert into estudiante values (3929875,1,111,11,1,1010,'guillermo',3929875,'guillermo@gmail.com',2);
+insert into estudiante values (4129875,1,111,11,1,1010,'noralia',4129875,'noralia@gmail.com',3);
+insert into estudiante values (37929871,1,111,11,1,1010,'manuel',37929871,'manuel@gmail.com',7);
+
+insert into estudiante values (34929871,2,222,22,2,2020,'mariano',35929871,'mariao@gmail.com',2);
+insert into estudiante values (31929871,2,222,22,2,2020,'julio',31929871,'julio@gmail.com',4);
+insert into estudiante values (30929871,2,222,22,2,2020,'ramiro',30929871,'ramiro@gmail.com',7);
+insert into estudiante values (40929872,2,222,22,2,2020,'laureano',40929872,'laureano@gmail.com',5);
+
+insert into estudiante values (30929873,3,333,33,3,3030,'luciana',30929873,'luciana@gmail.com',3);
+insert into estudiante values (37929873,3,333,33,3,3030,'paula',37929873,'paula@gmail.com',4);
+insert into estudiante values (42929873,3,333,33,3,3030,'aldana',42929873,'aldana@gmail.com',5);
+insert into estudiante values (40929873,3,333,33,3,3030,'guillermina',40929873,'guillermina@gmail.com',2);
+
+insert into estudiante values (39929874,4,444,44,4,4040,'leandro',39929874,'leandro@gmail.com',4);
+insert into estudiante values (30929874,4,444,44,4,4040,'ezequiel',30929874,'ezequiel@gmail.com',2);
+insert into estudiante values (41929874,4,444,44,4,4040,'agustin',41929874,'agustin@gmail.com',6);
+insert into estudiante values (40929874,4,444,44,4,4040,'orlando',40929874,'orlando@gmail.com',2);
+
+insert into estudiante values (42929875,5,555,55,5,5050,'oriana',42929875,'oriana@gmail.com',4);
+insert into estudiante values (30929875,5,555,55,5,5050,'ariel',30929875,'ariel@gmail.com',2);
+insert into estudiante values (41929875,5,555,55,5,5050,'cristian',41929875,'cristian@gmail.com',4);
+insert into estudiante values (40929875,5,555,55,5,5050,'alejandra',40929875,'alejandra@gmail.com',7);
+
+
+insert into inscripcion values (1010,111,40929871,1,20230301,'1cte');
+insert into inscripcion values (2020,222,40929872,2,20230801,'2cte');
+insert into inscripcion values (3030,333,40929873,3,20230301,'1cte');
+insert into inscripcion values (4040,444,40929874,4,20230801,'2cte');
+insert into inscripcion values (5050,555,40929875,5,20230301,'1cte');
+
+
+ALTER TABLE carreras ADD CONSTRAINT FOREIGN KEY
+  (id_estudiante) references estudiante (id_estudiante) ;
+  
+  ALTER TABLE carreras ADD CONSTRAINT FOREIGN KEY
+  (id_ubicacion) references ubicacion (id_ubicacion); 
+  
+  ALTER TABLE carreras ADD CONSTRAINT FOREIGN KEY
+  (id_facultad) references facultad (id_facultad);
+  
+   ALTER TABLE ubicacion ADD CONSTRAINT FOREIGN KEY
+  (id_facultad) references facultad (id_facultad) ;
+  
+  ALTER TABLE ubicacion ADD CONSTRAINT FOREIGN KEY
+  (id_carreras) references carreras (id_carreras);
+  
+  ALTER TABLE facultad ADD CONSTRAINT FOREIGN KEY
+  (id_ubicacion) references ubicacion (id_ubicacion) ;
+  
+  ALTER TABLE facultad ADD CONSTRAINT FOREIGN KEY
+  (id_carreras) references carreras (id_carreras);
+  
+  ALTER TABLE profesores ADD CONSTRAINT FOREIGN KEY
+   (id_facultad) references facultad (id_facultad),
+   ADD CONSTRAINT FOREIGN KEY
+   (id_materia) references materia (id_materia),
+   ADD CONSTRAINT FOREIGN KEY
+   (id_comision) references comision (id_comision);
+   
+    ALTER TABLE materia ADD CONSTRAINT FOREIGN KEY
+   (id_profesores) references profesores (id_profesores);
+   
+     ALTER TABLE materia ADD CONSTRAINT FOREIGN KEY
+   (id_comision) references comision (id_comision);
+   
+     ALTER TABLE materia ADD CONSTRAINT FOREIGN KEY
+   (id_carrera) references carreras (id_carreras);
+   
+   ALTER TABLE comision ADD CONSTRAINT FOREIGN KEY
+   (id_materia) references materia (id_materia);
+   
+  ALTER TABLE comision ADD CONSTRAINT FOREIGN KEY
+    (id_profesor) references profesores (id_profesores);
+ 
+   ALTER TABLE comision ADD CONSTRAINT FOREIGN KEY
+   (id_estudiante) references estudiante (id_estudiante);
+   
+	ALTER TABLE comision ADD CONSTRAINT FOREIGN KEY
+	(id_inscripcion) references inscripcion (id_inscripcion);
+    
+  ALTER TABLE estudiante ADD CONSTRAINT FOREIGN KEY
+  (id_carrera) references carreras (id_carreras);
+  ALTER TABLE estudiante ADD CONSTRAINT FOREIGN KEY
+  (id_comision) references comision (id_comision);
+ ALTER TABLE estudiante ADD CONSTRAINT FOREIGN KEY 
+  (id_materia) references materia (id_materia);
+  ALTER TABLE estudiante ADD CONSTRAINT FOREIGN KEY 
+  (id_facultad) references facultad (id_facultad);
+  ALTER TABLE estudiante ADD CONSTRAINT FOREIGN KEY
+  (id_inscripcion) references inscripcion (id_inscripcion);
+  
+  ALTER TABLE inscripcion ADD CONSTRAINT FOREIGN KEY
+  (id_comision) references comision (id_comision),
+  ADD CONSTRAINT FOREIGN KEY 
+  (id_estudiante) references estudiante (id_estudiante),
+  ADD CONSTRAINT FOREIGN KEY 
+  (id_carrera) references carreras (id_carreras);
