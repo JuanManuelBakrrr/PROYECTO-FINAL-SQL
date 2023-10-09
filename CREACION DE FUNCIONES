@@ -1,0 +1,67 @@
+USE universidad2;
+
+DELIMITER //
+
+CREATE FUNCTION insertar_estudiante(
+  `id_estudiante` int ,
+  `id_carrera`int,
+  `id_comision` int ,
+  `id_materia` int,
+  `id_facultad` int,
+  `id_inscripcion`int,
+  `nombre` varchar(45) ,
+  `dni` varchar(45),
+  `email` varchar(45),
+  nota varchar(10)
+)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    INSERT INTO estudiante (
+        id_estudiante,
+        id_carrera,
+        id_comision,
+        id_materia,
+        id_facultad,
+        id_inscripcion,
+        nombre,
+        dni,
+        email,
+        nota
+    )
+    VALUES (
+        estudiante_id,
+        carrera_id,
+        comision_id,
+        materia_id,
+        facultad_id,
+        inscripcion_id,
+        estudiante_nombre,
+      estudiante_dni,
+      estudiante_email,
+      estudiante_nota
+    );
+
+    RETURN estudiante_id;
+END;
+//
+
+SELECT insertar_estudiante (42929877,5,555,55,5,5050,'candela',42929877,'candela@gmail.com',4);
+
+
+delimiter //
+create function estudiantes_aprobados(
+   nombre varchar(45))
+   returns varchar(20)
+   deterministic
+begin
+	case 
+    when  nota<4 then
+      return 'desaprobado';
+    when nota>4 then
+      return 'promocionado';
+    when nota=4 then
+      return 'aprobado';
+	end case; 
+ end //
+ delimiter ;
