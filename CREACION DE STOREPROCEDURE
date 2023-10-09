@@ -1,0 +1,58 @@
+USE universidad2;
+
+delimiter //
+ create procedure sp_estudiantes_nombres()
+ begin
+   select nombre,dni
+   
+     from estudiante;
+ end //
+delimiter ;
+
+call sp_estudiantes_nombres();
+
+  
+  DELIMITER //
+CREATE PROCEDURE OrdenarCarrerasPorNombre()
+BEGIN
+    SELECT *
+    FROM carreras
+    ORDER BY nombre;
+END //
+
+DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE Insertar_ubicacion(
+  IN id_ubicacion int ,
+  IN id_facultad int,
+  IN id_carreras int,
+  IN nombre varchar(45)
+   
+)
+BEGIN
+    INSERT INTO ubicacion (
+        id_ubicacion,
+        id_facultad,
+        id_carreras,
+        nombre
+    )
+    VALUES (
+        U_id_ubicacion,
+        U_id_facultad,
+        U_id_carreras,
+        U_nombre
+    );
+END //
+
+DELIMITER ;
+
+CALL Insertar_ubicacion(
+    6, -- U_id_ubicacion
+    6, -- U_id_facultad
+    4, -- U_id_carreras
+'bariloche'-- U_nombre
+
+);
