@@ -1,0 +1,34 @@
+use universidad2;
+
+CREATE VIEW facultad_nombre AS 
+SELECT * FROM facultad;
+
+CREATE VIEW facultades_NOMBRE_MAIL AS 
+(SELECT nombre, email FROM facultad);
+
+CREATE VIEW estudiantes_carreras as (
+SELECT es.id_estudiante , es.nombre , ca.nombre as nombre_carrera 
+FROM estudiante as es
+join carreras as ca
+ON ca.id_estudiante=es.id_estudiante );
+
+
+
+CREATE  VIEW nota_promocionada AS
+(SELECT es.nombre, es.nota,mat.nombre as nombremateria,com.nombrecomi
+	FROM comision as com
+	left join estudiante as es ON es.id_estudiante = com.id_estudiante
+    left join materia as mat on mat.id_materia=com.id_materia
+   where es.nota >=2
+);
+
+
+
+
+CREATE VIEW inscripciones_cuatrimistres_alumnos AS
+(select ins.periodo,ins.fecha,es.nombre,es.id_estudiante,com.numero as numerocomi,car.nombre as nombrecarrera
+from estudiante as es
+left join inscripcion as ins on ins.id_inscripcion=es.id_inscripcion
+left join comision as com on com.id_comision=es.id_comision
+left join carreras as car on car.id_carreras=es.id_carrera
+);
