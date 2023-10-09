@@ -1,0 +1,35 @@
+use universidad2;
+
+CREATE TABLE new_notas_estudiantes (
+id_estudiante INT PRIMARY KEY,
+id_materia int,
+nota int
+);
+
+drop trigger notas_estudiantes_numericas;
+create trigger notas_estudiantes_numericas
+before insert on estudiante
+for each row
+insert into new_notas_estudiantes (id_estudiante,id_materia,nota)
+values (new.id_estudiante,new.id_materia,new.nota);
+
+ insert into estudiante values (29876543,1,111,11,1,1010,'maria',33929871,'mariaa@gmail.com',4);
+
+
+-- creacion de trigger donde dice si la nota del alumno es APROBADO O REPROBAD
+
+
+DELIMITER $$
+CREATE TRIGGER trigger_notas_estudiantes
+BEFORE INSERT ON estudiante
+FOR EACH ROW
+BEGIN
+  IF NEW.nota < 4 THEN
+    set NEW.nota = 'desaprobado';
+  ELSEIF NEW.nota > 4 THEN
+    set NEW.nota = 'aprobado';
+  END IF;
+END$$
+
+
+insert into estudiante values (37654871,1,111,11,1,1010,'gonzalo',40929873,'gonzalo@gmail.com',7);
