@@ -1,0 +1,31 @@
+use mysql;
+ 
+ -- EL PRIMER USUARIO SOLO PODRA LEER LA INFORMACION DE LA DB---
+ CREATE USER usuario1@localhost IDENTIFIED BY 'manu1234$$';
+ 
+ -- EL SEGUNDO USUARIO PODRA LEER ,AGREGA Y ACTUALIZAR LA DB--
+ CREATE USER usuario2@localhost IDENTIFIED BY 'manu12345$$';
+ 
+ -- EL TERCER USUARIO SOLO PODRA LEER Y ELIMINAR REGISTROS --
+ CREATE USER usuario3@localhost IDENTIFIED BY 'manu123456$$';
+ 
+ SELECT * FROM user WHERE User LIKE ='usuario%'
+ 
+ 
+ -- PERMISOS DE LECTURA PARA EL USUARIO 1 --
+ 
+GRANT SELECT ON universidad.carreras to usuario1@localhost;
+GRANT SELECT ON universidad.ubicacion to usuario1@localhost;
+
+SHOW GRANTS FOR  usuario1@localhost;
+
+-- PERMISOS PARA EL USUARIO 2 ,LEER ,AGREGA Y ACTUALIZAR LA DB -- 
+GRANT select,insert,update ON universidad.* TO usuario2@localhost;
+
+SHOW GRANTS FOR usuario2@localhost;
+
+-- PERMISOS PARA EL USUARIO 3 LEER Y ELIMINAR REGISTROS--
+
+GRANT SELECT,DELETE ON universidad.* TO usuario3@localhost;
+
+SHOW GRANTS FOR usuario3@localhost;
